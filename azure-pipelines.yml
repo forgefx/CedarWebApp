@@ -28,7 +28,8 @@ steps:
     script: 'dotnet tool install Octopus.DotNet.Cli --global'
 
 - task: CmdLine@2
+  displayName: 'Publish and Pack'
   inputs:
     script: |
-      dotnet publish CedarWepApp -o PackageFolder
+      dotnet publish CedarWepApp.sln -o PackageFolder
       dotnet-octo pack --id=CedarWebApp --outFolder=ArtifactFolder --basePath=PackageFolder
