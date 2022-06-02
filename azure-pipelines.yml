@@ -31,5 +31,5 @@ steps:
   displayName: 'Publish and Pack'
   inputs:
     script: |
-      dotnet publish CedarWepApp.sln -o PackageFolder
-      dotnet-octo pack --id=CedarWebApp --outFolder=ArtifactFolder --basePath=PackageFolder
+      dotnet publish CedarWepApp
+      dotnet-octo pack --id=CedarWebApp
