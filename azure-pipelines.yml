@@ -16,8 +16,19 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+  condition: 
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
 
 - task: CmdLine@2
   displayName: 'OctoTool Install'
   inputs:
     script: 'dotnet tool install Octopus.DotNet.Cli --global'
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      dotnet publish CedarWepApp -o PackageFolder
+      dotnet-octo pack --id=CedarWebApp --outFolder=ArtifactFolder --basePath=PackageFolder
